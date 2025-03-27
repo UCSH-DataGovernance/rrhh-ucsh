@@ -7,16 +7,11 @@ import numpy as np
 
 @st.cache_data
 def load_data():
-    try:
-        df = pd.read_csv("data/Resultados2024.csv", delimiter=",", encoding="ISO-8859-1")
-    except UnicodeDecodeError:
         df = pd.read_csv("data/Resultados2024.csv", delimiter=",", encoding="utf-8")
+
 
     # Limpieza de nombres de columnas
     df.columns = df.columns.str.strip().str.replace("\u00a0", " ", regex=False).str.replace("\ufeff", "", regex=False)
-
-    # Mostrar columnas por si hay errores de nombre
-    st.write("🧾 Columnas detectadas en el archivo CSV:", df.columns.tolist())
 
     columnas_requeridas = ["Nota Final Evaluación", "Ponderación Rol Evaluación"]
     for col in columnas_requeridas:
