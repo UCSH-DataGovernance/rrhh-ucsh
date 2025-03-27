@@ -2,30 +2,28 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-
-
-# El resto de tu código sigue exactamente igual desde aquí
-
 # Cargar datos
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/Resultados2024.csv", delimiter=",", encoding="ISO-8859-1")
+    df = pd.read_csv("data/Resultados2024.csv", delimiter=";", encoding="ISO-8859-1")
     df.columns = df.columns.str.strip().str.replace("\u00a0", " ").str.replace("\ufeff", "")
     
-    # Validaciones
     columnas_requeridas = ["Nota Final Evaluación", "Ponderación Rol Evaluación"]
     for col in columnas_requeridas:
         if col not in df.columns:
             st.error(f"❌ No se encontró la columna '{col}' en el archivo.")
             st.stop()
-
+    
     df["Nota Final Evaluación"] = pd.to_numeric(df["Nota Final Evaluación"].replace("-", np.nan), errors='coerce')
     df["Ponderación Rol Evaluación"] = pd.to_numeric(df["Ponderación Rol Evaluación"].replace("-", np.nan), errors='coerce')
-
+    
     return df
 
 # Cargar el DataFrame
 df = load_data()
+
+# Confirmar columnas cargadas (opcional para debug)
+# st.write(df.columns.tolist())
 
 st.title("Panel de Evaluación UCSH")
 
