@@ -5,7 +5,7 @@ import numpy as np
 # Cargar datos
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/Resultados2024.csv", delimiter=";", encoding="ISO-8859-1")
+    df = pd.read_csv("data/Resultados2024.csv", delimiter=";", encoding="utf-8")
     df.columns = df.columns.str.strip().str.replace("\u00a0", " ").str.replace("\ufeff", "")
     
     columnas_requeridas = ["Nota Final Evaluación", "Ponderación Rol Evaluación"]
