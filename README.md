@@ -1,1 +1,2 @@
-# rrhh-ucsh
+# ucsh-dashboard
+Panelería para RRHH
