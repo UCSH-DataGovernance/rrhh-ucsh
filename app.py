@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-df.columns = df.columns.str.strip().str.replace("\u00a0", " ").str.replace("\ufeff", "")
+
 
 
 # El resto de tu código sigue exactamente igual desde aquí
