@@ -5,25 +5,23 @@ import numpy as np
 
 # El resto de tu código sigue exactamente igual desde aquí
 
+# Cargar datos
 @st.cache_data
 def load_data():
-        df = pd.read_csv("data/Resultados2024.csv", delimiter=",", encoding="utf-8")
-
-
-    # Limpieza de nombres de columnas
-    df.columns = df.columns.str.strip().str.replace("\u00a0", " ", regex=False).str.replace("\ufeff", "", regex=False)
-
+    df = pd.read_csv("data/Resultados2024.csv", delimiter=",", encoding="utf-8")
+    df.columns = df.columns.str.strip().str.replace("\u00a0", " ").str.replace("\ufeff", "")
+    
+    # Validaciones
     columnas_requeridas = ["Nota Final Evaluación", "Ponderación Rol Evaluación"]
     for col in columnas_requeridas:
         if col not in df.columns:
-            st.error(f"❌ No se encontró la columna '{col}' en el archivo. Verifica nombre exacto.")
+            st.error(f"❌ No se encontró la columna '{col}' en el archivo.")
             st.stop()
 
     df["Nota Final Evaluación"] = pd.to_numeric(df["Nota Final Evaluación"].replace("-", np.nan), errors='coerce')
     df["Ponderación Rol Evaluación"] = pd.to_numeric(df["Ponderación Rol Evaluación"].replace("-", np.nan), errors='coerce')
 
     return df
-
 
 # Cargar el DataFrame
 df = load_data()
@@ -222,4 +220,3 @@ for dimension, columnas_nota in atributos_por_dimension.items():
     else:
         st.markdown(f"### {dimension}")
         st.info("No se encontraron atributos evaluados para esta dimensión.")
-
