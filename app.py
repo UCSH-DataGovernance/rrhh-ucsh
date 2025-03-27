@@ -8,9 +8,9 @@ import numpy as np
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv("data/Resultados_ROL.csv", delimiter=",", encoding="ISO-8859-1")
+        df = pd.read_csv("data/Resultados2024.csv", delimiter=",", encoding="ISO-8859-1")
     except UnicodeDecodeError:
-        df = pd.read_csv("data/Resultados_ROL.csv", delimiter=",", encoding="utf-8")
+        df = pd.read_csv("data/Resultados2024.csv", delimiter=",", encoding="utf-8")
 
     # Limpieza de nombres de columnas
     df.columns = df.columns.str.strip().str.replace("\u00a0", " ", regex=False).str.replace("\ufeff", "", regex=False)
